@@ -9,14 +9,34 @@ const limit = 10;
 const offset = 0;
 
 function getAllMovies(req, res, next) {
+  // console.log('get all movies');
+db.query(`SELECT * FROM movies LIMIT ${limit} OFFSET ${offset};`)
+  .then((data) => {
+    res.rows = data;
+    // console.log(data);
+    next();
+  })
+  .catch((error) => {
+    next(error);
+  })
 // implement get all movies
 }
 
 function getMovie(req, res, next) {
-// implement get single movie
+
+// var movieID = parseInt(req.params.id);
+// db.one('SELECT * FROM movies where id = $1', movieID)
+//   .then((data) => {
+//     res.rows = data;
+//     next();
+//   })
+//   .catch(error => next(error));
+// // implement get single movie
 }
 
 function updateMovie(req, res, next) {
+
+
 // implement update
 }
 
