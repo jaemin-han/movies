@@ -1,17 +1,23 @@
 const express = require('express');
-const router = express.Router();
-const { getAllMovies, getMovie, getAllMoviesWithRatings } = require('../../models/movie');
+const movies = express.Router();
+const { getAllMovies, getMovie, updateMovie, deleteMovie, getAllMoviesWithRatings } = require('../../models/movie');
 const sendJSONresponse = (req, res) => res.json(res.rows);
+const sendOkResponse = (req, res) => res.status(204).send();
 
 // handle all the routes
 
 
-router.route('/')
+movies.route('/')
   .get(getAllMovies, sendJSONresponse);
-  // .put()
-  // .delete()
+  // .post();
 
-// movies.route('/api/movies')
+movies.route('/:id')
+  .get(getMovie, sendJSONresponse)
+  .put(updateMovie, sendOkResponse)
+  .delete(deleteMovie, sendOkResponse);
+
+// movies.route('/:id/:title')
+//   .put(updateMovie, sendJSONresponse);
 
 
 
@@ -23,7 +29,7 @@ router.route('/')
 
 // Get single movie
 
-module.exports = router;
+module.exports = movies;
 
 
 
